@@ -7,11 +7,11 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Position extends Model {
     static associate(models) {
-      Position.hasMany(models.Employee, {foreignKey: "PositionID"})
+      Position.hasMany(models.Employee, {foreignKey: "PositionId"})
     }
   }
   Position.init({
-    id: DataTypes.UUID,
+    id: DataTypes.INTEGER,
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,11 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {
-    hooks: {
-      beforeCreate: (el) => {
-        el.id = uuidv4();
-      }
-    },
     sequelize,
     modelName: 'Position',
   });

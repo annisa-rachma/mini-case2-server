@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       BranchId: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model: {
             tableName: 'Branches'
@@ -29,8 +29,8 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
-      PositionID: {
-        type: Sequelize.UUID,
+      PositionId: {
+        type: Sequelize.INTEGER,
         references: {
           model: {
             tableName: 'Positions'

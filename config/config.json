@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "test2_BNI",
+    "database": "BNI_mini_case",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

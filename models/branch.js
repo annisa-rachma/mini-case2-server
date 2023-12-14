@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Branch.init({
-    id: DataTypes.UUID,
+    id: DataTypes.INTEGER,
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,11 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {
-    hooks: {
-      beforeCreate: (el) => {
-        el.id = uuidv4();
-      }
-    },
     sequelize,
     modelName: 'Branch',
   });

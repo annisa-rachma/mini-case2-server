@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     static associate(models) {
       Employee.belongsTo(models.Branch, {foreignKey : "BranchId", onDelete: 'CASCADE', onUpdate: 'CASCADE'})
-      Employee.belongsTo(models.Position, {foreignKey : "PositionID", onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+      Employee.belongsTo(models.Position, {foreignKey : "PositionId", onDelete: 'CASCADE', onUpdate: 'CASCADE'})
     }
   }
   Employee.init({
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     BranchId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    PositionID: {
-      type: DataTypes.UUID,
+    PositionId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {

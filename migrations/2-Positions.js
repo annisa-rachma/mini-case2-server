@@ -4,10 +4,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Positions', {
       id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING,
@@ -21,7 +21,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    },
+    {
+      initialAutoIncrement: 100,
+    }
+    );
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Positions');
