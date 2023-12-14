@@ -1,15 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const Controller = require('../controllers/controller')
-const { authentication } = require('../middlewares/authentication')
+const branches = require('./branches')
+const positions = require('./positions')
+const employees = require('./employees')
 
-router.post('/login', Controller.loginAccount)
-
-router.use(authentication)
-
-router.get('/account', Controller.getAccountDetail)
-router.post('/transaction/transfer', Controller.postTransaction)
-router.post('/transaction/payment', Controller.postPayment)
-router.get('/report', Controller.getReport)
+router.use('/client', branches)
+router.use('/admin', positions)
+router.use('/admin', employees)
 
 module.exports = router
