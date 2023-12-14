@@ -1,5 +1,3 @@
-# Mini-Case-Server
-
 # API Documentation
 
 ## Endpoints :
