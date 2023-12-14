@@ -1,0 +1,22 @@
+[
+  {
+    "id" : 100,
+    "name" : "Teller"
+  },
+  {
+    "id" : 101,
+    "name" : "Asisten Administrasi"
+  },
+  {
+    "id" : 102,
+    "name" : "Analis Keuangan"
+  },
+  {
+    "id" : 103,
+    "name" : "Asisten Manajer"
+  },
+  {
+    "id" : 104,
+    "name" : "Manajer Cabang"
+  }
+]

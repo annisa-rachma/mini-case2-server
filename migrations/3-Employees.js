@@ -2,26 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Accounts', {
+    await queryInterface.createTable('Employees', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
-      accountNo: {
+      firstName: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
       },
-      PIN: {
-        type: Sequelize.STRING
+      lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      CustomerId: {
-        type: Sequelize.UUID,
+      BranchId: {
+        type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Customers'
+            tableName: 'Branches'
           },
           key: 'id'
         },
@@ -29,14 +29,25 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
-      accountType: {
-        type: Sequelize.STRING
+      PositionId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Positions'
+          },
+          key: 'id'
+        },
+        allowNull: false,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      accountStatus: {
-        type: Sequelize.STRING
+      startDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
-      balance: {
-        type: Sequelize.BIGINT
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +60,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Accounts');
+    await queryInterface.dropTable('Employees');
   }
 };

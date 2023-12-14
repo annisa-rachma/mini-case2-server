@@ -1,0 +1,47 @@
+[
+  {
+    "id" : "c96caa12-05b7-419a-af12-4caec25d9449",
+    "firstName" : "John",
+    "lastName" : "Doe",
+    "BranchId" : 1010,
+    "PositionId" : 100,
+    "startDate" : "2023-01-01",
+    "endDate" : "2023-12-31"
+  },
+  {
+    "id" : "a9ac35a3-11a0-4f88-b383-d452a03bdd5d",
+    "firstName" : "Jane",
+    "lastName" : "Smith",
+    "BranchId" : 1011,
+    "PositionId" : 101,
+    "startDate" : "2023-02-15",
+    "endDate" : "2024-02-15"
+  },
+  {
+    "id" : "bfc2b6e7-03dc-4fc0-83aa-a8e8ae85aa21",
+    "firstName" : "Bob",
+    "lastName" : "Johnson",
+    "BranchId" : 1010,
+    "PositionId" : 101,
+    "startDate" : "2023-03-10",
+    "endDate" : "2024-02-22"
+  },
+  {
+    "id" : "ffc2b6e7-03dc-4fc0-83aa-a8e8ae85aa21",
+    "firstName" : "Alice",
+    "lastName" : "Williams",
+    "BranchId" : 1012,
+    "PositionId" : 104,
+    "startDate" : "2023-04-05",
+    "endDate" : "2024-04-05"
+  },
+  {
+    "id" : "44ad9092-7229-44b7-8544-817f3415284e",
+    "firstName" : "Charlie",
+    "lastName" : "Brown",
+    "BranchId" : 1013,
+    "PositionId" : 102,
+    "startDate" : "2023-04-12",
+    "endDate" : "2024-04-12"
+  }
+]

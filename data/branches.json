@@ -1,0 +1,22 @@
+[
+  {
+    "id" : 1010,
+    "name" : "Cabang Jakarta Pusat"
+  },
+  {
+    "id" : 1011,
+    "name" : "Cabang Jakarta Selatan"
+  },
+  {
+    "id" : 1012,
+    "name" : "Cabang Surabaya"
+  },
+  {
+    "id" : 1013,
+    "name" : "Cabang Medan"
+  },
+  {
+    "id" : 1014,
+    "name" : "Cabang Yogyakarta"
+  }
+]
