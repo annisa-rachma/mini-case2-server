@@ -1,4 +1,4 @@
-const { Branch, Employee, Position } = require("../models");
+const { Branch } = require("../models");
 
 class BranchesController {
   static async getAllBranches(req, res, next) {
@@ -36,7 +36,9 @@ class BranchesController {
         name: req.body.name,
       });
 
-      res.status(201).json({ message: `Berhasil menambahkan cabang baru`, branch });
+      res
+        .status(201)
+        .json({ message: `Berhasil menambahkan cabang baru`, branch });
     } catch (err) {
       console.log(err);
       next(err);
@@ -45,24 +47,27 @@ class BranchesController {
 
   static async editBranchById(req, res, next) {
     try {
-        await Branch.update({
-            name: req.body.name,
-        },{
+      await Branch.update(
+        {
+          name: req.body.name,
+        },
+        {
           where: { id: req.params.id },
-        });
-        res.status(200).json({ message: `Berhasil mengedit nama cabang` });
-      } catch (err) {
-        console.log(err);
-        next(err);
-      }
+        }
+      );
+      res.status(200).json({ message: `Berhasil mengedit nama cabang` });
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
   }
 
   static async deleteBranchById(req, res, next) {
     try {
-        await Branch.destroy({where : {id : req.params.id}})
-        res.status(200).json({message : `Berhasil menghapus cabang`})  
+      await Branch.destroy({ where: { id: req.params.id } });
+      res.status(200).json({ message: `Berhasil menghapus cabang` });
     } catch (err) {
-        next(err)
+      next(err);
     }
   }
 }

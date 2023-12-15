@@ -1,26 +1,17 @@
-const { Branch, Employee, Position } = require("../models");
+const { Position } = require("../models");
 
 class PositionController {
   static async getAllPosition(req, res, next) {
-    try{
-        const products = await Product.findAll({
-            include: [
-                {   model: Category,
-                    attributes : {
-                        exclude : ['createdAt', 'updatedAt']
-                    }
-                }
-            ],
-            attributes : {
-                exclude : ['createdAt', 'updatedAt']
-            },
-            order : [['id', 'desc']]
-        })
-        res.status(200).json(products)
-    }
-    catch(err) {
-        next(err)
-    }
+    try {
+        const positions = await Position.findAll({
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        });
+        res.status(200).json(positions);
+      } catch (err) {
+        next(err);
+      }
   }
 
   static async getPositionById(req, res, next) {
