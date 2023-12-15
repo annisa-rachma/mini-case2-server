@@ -59,7 +59,20 @@ class EmployeeController {
     }
   }
 
-  static async postEmployee(req, res, next) {}
+  static async postEmployee(req, res, next) {
+    try {
+      const employee = await Employee.create({
+        ...req.body
+      });
+
+      res
+        .status(201)
+        .json({ message: `Berhasil menambahkan pegawai baru`, employee });
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  }
 
   static async editEmployeeById(req, res, next) {}
 
