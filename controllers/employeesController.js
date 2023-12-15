@@ -62,7 +62,7 @@ class EmployeeController {
   static async postEmployee(req, res, next) {
     try {
       const employee = await Employee.create({
-        ...req.body
+        ...req.body,
       });
 
       res
@@ -76,22 +76,29 @@ class EmployeeController {
 
   static async editEmployeeById(req, res, next) {
     try {
-        await Employee.update(
-          {
-            ...req.body
-          },
-          {
-            where: { id: req.params.id },
-          }
-        );
-        res.status(200).json({ message: `Berhasil mengedit pegawai` });
-      } catch (err) {
-        console.log(err);
-        next(err);
-      }
+      await Employee.update(
+        {
+          ...req.body,
+        },
+        {
+          where: { id: req.params.id },
+        }
+      );
+      res.status(200).json({ message: `Berhasil mengedit pegawai` });
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
   }
 
-  static async deleteEmployeeById(req, res, next) {}
+  static async deleteEmployeeById(req, res, next) {
+    try {
+      await Employee.destroy({ where: { id: req.params.id } });
+      res.status(200).json({ message: `Berhasil menghapus pegawai` });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = EmployeeController;
