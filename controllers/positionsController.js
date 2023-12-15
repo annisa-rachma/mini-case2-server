@@ -46,7 +46,20 @@ class PositionController {
   }
 
   static async editPositionById(req, res, next) {
-    
+    try {
+        await Position.update(
+          {
+            name: req.body.name,
+          },
+          {
+            where: { id: req.params.id },
+          }
+        );
+        res.status(200).json({ message: `Berhasil mengedit nama jabatan` });
+      } catch (err) {
+        console.log(err);
+        next(err);
+      }
   }
 
   static async deletePositionById(req, res, next) {
