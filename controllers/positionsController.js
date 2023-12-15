@@ -31,7 +31,18 @@ class PositionController {
   }
 
   static async postPosition(req, res, next) {
-
+    try {
+        const position = await Position.create({
+          name: req.body.name,
+        });
+  
+        res
+          .status(201)
+          .json({ message: `Berhasil menambahkan jabatan baru`, position });
+      } catch (err) {
+        console.log(err);
+        next(err);
+      }
   }
 
   static async editPositionById(req, res, next) {
