@@ -74,7 +74,22 @@ class EmployeeController {
     }
   }
 
-  static async editEmployeeById(req, res, next) {}
+  static async editEmployeeById(req, res, next) {
+    try {
+        await Employee.update(
+          {
+            ...req.body
+          },
+          {
+            where: { id: req.params.id },
+          }
+        );
+        res.status(200).json({ message: `Berhasil mengedit pegawai` });
+      } catch (err) {
+        console.log(err);
+        next(err);
+      }
+  }
 
   static async deleteEmployeeById(req, res, next) {}
 }
