@@ -10,9 +10,12 @@ const errHandler = (err, req, res, next) => {
         case "InvalidEmail/Password" :
             res.status(401).json({message : "Invalid email or password"});
             break;
-        case "JsonWebTokenError" :
-        case "InvalidToken" : 
-            res.status(401).json({message : "Invalid Token"});
+            case "JsonWebTokenError" :
+                case "InvalidToken" : 
+                res.status(401).json({message : "Invalid Token"});
+                break;
+        case "NotFound" :
+            res.status(404).json({message : "Cabang tidak ditemukan"});
             break;
         default :
             console.log(err.name)
