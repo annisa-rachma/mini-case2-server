@@ -16,37 +16,18 @@ class PositionController {
 
   static async getPositionById(req, res, next) {
     try {
-        const product = await Product.findOne({
-            where : {id : req.params.productId},
-            include: [
-                {   model: Image,
-                    where : {productId : req.params.productId },
-                    attributes : {
-                        exclude : ['createdAt', 'updatedAt']
-                    }
-                },
-                {   model: User,
-                    attributes : {
-                        exclude : ['createdAt', 'updatedAt', 'password', 'role', 'phoneNumber', 'address']
-                    }
-                },
-                {   model: Category,
-                    attributes : {
-                        exclude : ['createdAt', 'updatedAt']
-                    }
-                },
-
-            ],
-            attributes : {
-                exclude : ['createdAt', 'updatedAt']
-            },
-        })
-        if(!product) throw {name : "NotFound"} 
-        res.status(200).json(product)
-    } catch (err) {
-        console.log(err)
-      next(err);
-    }
+        const position = await Position.findOne({
+          where: { id: req.params.id },
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        });
+        if (!position) throw { name: "NotFound" };
+        res.status(200).json(position);
+      } catch (err) {
+        console.log(err);
+        next(err);
+      }
   }
 
   static async postPosition(req, res, next) {
