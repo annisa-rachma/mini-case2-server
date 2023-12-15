@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Position.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {
+    hooks: {
+      beforeCreate: (el) => {
+        el.id = uuidv4();
+      }
+    },
     sequelize,
     modelName: 'Position',
   });

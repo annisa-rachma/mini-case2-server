@@ -1,22 +1,22 @@
 [
   {
-    "id" : 100,
+    "id" : "c4331483-e737-44d8-9165-f705ac5508c1",
     "name" : "Teller"
   },
   {
-    "id" : 101,
+    "id" : "ae57df22-f865-467c-b347-d3bd6f90d606",
     "name" : "Asisten Administrasi"
   },
   {
-    "id" : 102,
+    "id" : "73114fed-b23a-4842-8ee0-120d0405b7e7",
     "name" : "Analis Keuangan"
   },
   {
-    "id" : 103,
+    "id" : "e7e2f043-5622-4a04-a0f2-05a61c84adca",
     "name" : "Asisten Manajer"
   },
   {
-    "id" : 104,
+    "id" : "a9b89708-d534-4577-838c-4ffd1f4d8a9b",
     "name" : "Manajer Cabang"
   }
 ]

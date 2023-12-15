@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Employee.init({
-    id: DataTypes.UUID,
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -38,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     BranchId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       validate: {
         notNull: {
@@ -50,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     PositionId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       validate: {
         notNull: {

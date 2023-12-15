@@ -1,22 +1,22 @@
 [
   {
-    "id" : 1010,
+    "id" : "de459730-aeea-4760-b558-f9b322be9de5",
     "name" : "Cabang Jakarta Pusat"
   },
   {
-    "id" : 1011,
+    "id" : "352884e0-2c22-4fef-896e-e3021750e3ea",
     "name" : "Cabang Jakarta Selatan"
   },
   {
-    "id" : 1012,
+    "id" : "6675542a-b78a-4efc-bfb9-e1f93eb38754",
     "name" : "Cabang Surabaya"
   },
   {
-    "id" : 1013,
+    "id" : "8198b7fa-3074-4be5-8a3c-15c26d0f84b0",
     "name" : "Cabang Medan"
   },
   {
-    "id" : 1014,
+    "id" : "64d66710-259c-402a-b1f6-ccd01c488e3e",
     "name" : "Cabang Yogyakarta"
   }
 ]

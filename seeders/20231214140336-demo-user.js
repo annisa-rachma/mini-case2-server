@@ -16,6 +16,7 @@ module.exports = {
       return el
     })
 
+    // console.log(dataPositions)
     await queryInterface.bulkInsert('Branches', dataBranches);
     await queryInterface.bulkInsert('Positions', dataPositions);
     await queryInterface.bulkInsert('Employees', dataEmployees);
