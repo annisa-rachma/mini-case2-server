@@ -63,7 +63,12 @@ class PositionController {
   }
 
   static async deletePositionById(req, res, next) {
-    
+    try {
+        await Position.destroy({ where: { id: req.params.id } });
+        res.status(200).json({ message: `Berhasil menghapus jabatan` });
+      } catch (err) {
+        next(err);
+      }
   }
 
 }
