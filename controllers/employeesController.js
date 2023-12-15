@@ -21,7 +21,7 @@ class EmployeeController {
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
-        order : [['endDate']]
+        order: [["endDate"]],
       });
       res.status(200).json(employees);
     } catch (err) {
@@ -31,31 +31,17 @@ class EmployeeController {
 
   static async getEmployeeById(req, res, next) {
     try {
-      const product = await Product.findOne({
-        where: { id: req.params.productId },
+      const employee = await Employee.findOne({
+        where: { id: req.params.id },
         include: [
           {
-            model: Image,
-            where: { productId: req.params.productId },
+            model: Branch,
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
           },
           {
-            model: User,
-            attributes: {
-              exclude: [
-                "createdAt",
-                "updatedAt",
-                "password",
-                "role",
-                "phoneNumber",
-                "address",
-              ],
-            },
-          },
-          {
-            model: Category,
+            model: Position,
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
@@ -65,8 +51,8 @@ class EmployeeController {
           exclude: ["createdAt", "updatedAt"],
         },
       });
-      if (!product) throw { name: "NotFound" };
-      res.status(200).json(product);
+      if (!employee) throw { name: "NotFound" };
+      res.status(200).json(employee);
     } catch (err) {
       console.log(err);
       next(err);
