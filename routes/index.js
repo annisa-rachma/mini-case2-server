@@ -1,14 +1,22 @@
 const express = require('express')
+const AdminController = require('../controllers/adminController')
 const router = express.Router()
 const BranchesController = require('../controllers/branchesController')
 const EmployeeController = require('../controllers/employeesController')
 const PositionController = require('../controllers/positionsController')
+const {authentication} = require('../middlewares/authentication')
 
-router.get('/braches', BranchesController.getAllBranches)
-router.post('/braches', BranchesController.postBranch)
-router.get('/braches/:id', BranchesController.getBranchById)
-router.put('/braches/:id', BranchesController.editBranchById)
-router.delete('/braches/:id', BranchesController.deleteBranchById)
+router.post('/login', AdminController.loginAdmin)
+
+router.use(authentication)
+
+router.post('/register', AdminController.registerAdmin)
+
+router.get('/branches', BranchesController.getAllBranches)
+router.post('/branches', BranchesController.postBranch)
+router.get('/branches/:id', BranchesController.getBranchById)
+router.put('/branches/:id', BranchesController.editBranchById)
+router.delete('/branches/:id', BranchesController.deleteBranchById)
 
 router.get('/positions', PositionController.getAllPosition)
 router.post('/positions', PositionController.postPosition)
