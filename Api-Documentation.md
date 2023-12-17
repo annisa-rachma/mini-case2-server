@@ -8,10 +8,25 @@ List of available endpoints:
 
 Routes below need authentication
 
-- `GET /account`
-- `POST /transaction/transfer`
-- `POST /transaction/payment`
-- `GET /report`
+- `POST /register`
+
+- `GET /branches`
+- `POST /branches`
+- `GET /branches/:id`
+- `PUT /branches/:id`
+- `DELETE /branches/:id`
+
+- `GET /positions`
+- `POST /positions`
+- `GET /positions/:id`
+- `PUT /positions/:id`
+- `DELETE /positions/:id`
+
+- `GET /employees`
+- `POST /employees`
+- `GET /employees/:id`
+- `PUT /employees/:id`
+- `DELETE /employees/:id`
 
 &nbsp;
 
@@ -31,7 +46,9 @@ Request:
 _Response (200 - OK)_
 
 ```json
-"access_token"
+{
+  "access_token": "access_token"
+}
 ```
 
 _Response (400 - Bad Request)_
@@ -52,11 +69,53 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
-## 2. GET /account
+## 2. POST /register
+
+Request:
+
+- body:
+
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "access_token": "access_token"
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "Email tidak boleh kosong"
+}
+```
+```json
+{
+  "message": "Password tidak boleh kosong"
+}
+```
+```json
+{
+  "message": "Email sudah terdaftar"
+}
+```
+
+
+&nbsp;
+
+## 3. GET /branches
 
 Description:
 
-- Get current user account details
+- Get all branches data
 
 Request:
 - headers:
@@ -70,33 +129,62 @@ Request:
 _Response (200 - OK)_
 
 ```json
+[
+  ...,
+  {
+    "id": "352884e0-2c22-4fef-896e-e3021750e3ea",
+    "name": "Cabang Jakarta Selatan"
+  },
+  ...,
+]
+
+```
+
+&nbsp;
+
+## 4. POST /branches
+
+Description:
+
+- Create a new branch
+
+Request:
+- headers:
+
+```json
 {
-  "id": "a9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-  "accountNo": "9599211230",
-  "CustomerId": "f9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-  "accountType": "Korporasi",
-  "accountStatus": "active",
-  "balance": "393492500",
-  "createdAt": "2023-12-08T23:48:23.754Z",
-  "updatedAt": "2023-12-10T22:27:53.215Z",
-  "Customer": {
-    "id": "f9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-    "firstName": "PT ABC",
-    "lastName": "",
-    "email": "abc@mail.com",
-    "address": "Jalan Bunga Indah No. 123"
+  "access_token": "string"
+}
+```
+- body:
+
+```json
+{
+  "name": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil menambahkan cabang baru",
+  "branch": {
+    "id": "157504c6-0fd5-4a3f-8c9d-cfba6392a393",
+    "name": "cabang",
+    "updatedAt": "2023-12-17T13:17:06.118Z",
+    "createdAt": "2023-12-17T13:17:06.118Z"
   }
 }
 
 ```
 
 &nbsp;
-
-## 3. POST /transaction/transfer
+## 5. GET /branches/:id
 
 Description:
 
-- Post a transaction 
+- Get spesific branch data by id 
 
 Request:
 - headers:
@@ -106,13 +194,10 @@ Request:
   "access_token": "string"
 }
 ```
-- body:
-
+- query : 
 ```json
 {
-  "toAccountNo": "string",
-  "amount": "number",
-  "PIN": "string"
+  "id": "string"
 }
 ```
 
@@ -120,90 +205,18 @@ _Response (200 - OK)_
 
 ```json
 {
-  "id": "e151ba66-5562-4302-9cce-f5dccec65744",
-  "AccountId": "a9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-  "transactionType": "Debet",
-  "transactionDetail": "Transfer Keluar",
-  "fromAccountNo": "9599211230",
-  "toAccountNo": "24772247",
-  "amount": "1000000",
-  "currency": "IDR",
-  "updatedAt": "2023-12-10T23:26:10.971Z",
-  "createdAt": "2023-12-10T23:26:10.971Z",
-  "destinationBankCode": null,
-  "fee": null
-}
-
-```
-
-&nbsp;
-## 4. POST /transaction/payment
-
-Description:
-
-- Post a electril bill payment 
-
-Request:
-- headers:
-
-```json
-{
-  "access_token": "string"
-}
-```
-- body:
-
-```json
-{
-  "PIN": "string"
-}
-```
-
-_Response (200 - OK)_
-
-```json
-{
-  "message": "Payment Success",
-  "transaction": [
-    {
-      "id": "739f3076-40e0-41b4-9f2e-3036a7a67958",
-      "AccountId": "a9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-      "transactionType": "Debet",
-      "transactionDetail": "Pembayaran Listrik",
-      "fromAccountNo": "9599211230",
-      "toAccountNo": "PLN",
-      "amount": "5000000",
-      "currency": "IDR",
-      "updatedAt": "2023-12-10T23:31:46.308Z",
-      "createdAt": "2023-12-10T23:31:46.308Z",
-      "destinationBankCode": null,
-      "fee": null
-    },
-    {
-      "id": "948a75b7-6765-4620-87e9-53de89179b5b",
-      "AccountId": "a9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-      "transactionType": "Debet",
-      "transactionDetail": "Biaya Admin",
-      "fromAccountNo": "9599211230",
-      "toAccountNo": "PLN",
-      "amount": "7500",
-      "currency": "IDR",
-      "updatedAt": "2023-12-10T23:31:46.316Z",
-      "createdAt": "2023-12-10T23:31:46.316Z",
-      "destinationBankCode": null,
-      "fee": null
-    }
-  ]
+  "id": "157504c6-0fd5-4a3f-8c9d-cfba6392a393",
+  "name": "cabang"
 }
 
 ```
 &nbsp;
 
-## 5. GET /report
+## 6. PUT /branches/:id
 
 Description:
 
-- Get current user account details
+- Edit branch by id
 
 Request:
 - headers:
@@ -217,8 +230,14 @@ Request:
 - query : 
 ```json
 {
-  "startDate": "string",
-  "endDate": "string"
+  "id": "string"
+}
+```
+- body:
+
+```json
+{
+  "name": "string"
 }
 ```
 
@@ -226,35 +245,429 @@ _Response (200 - OK)_
 
 ```json
 {
-  "accountNo": "9599211230",
-  "accountName": "PT ABC ",
-  "periode": "11-12-2023 - 12-12-2023",
-  "tanggalInquiry": "2023-12-10T23:34:29.836Z",
-  "openingBalance": 393492500,
-  "endingBalance": 373462500,
-  "report": [
-    ...,
-    {
-      "id": "e151ba66-5562-4302-9cce-f5dccec65744",
-      "AccountId": "a9ac35a3-11a0-4f88-b383-d452a03bdd5d",
-      "transactionType": "Debet",
-      "transactionDetail": "Transfer Keluar",
-      "fromAccountNo": "9599211230",
-      "toAccountNo": "24772247",
-      "amount": "7500",
-      "currency": "IDR",
-      "destinationBankCode": null,
-      "fee": null,
-      "createdAt": "2023-12-10T23:26:10.971Z",
-      "updatedAt": "2023-12-10T23:26:10.971Z"
-    },
-    ...
-  ]
+  "message": "Berhasil mengedit nama cabang"
 }
+
+```
+&nbsp;
+## 7. DELETE /branches/:id
+
+Description:
+
+- Delete branch by id
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil menghapus cabang"
+}
+
+```
+&nbsp;
+
+
+## 8. GET /positions
+
+Description:
+
+- Get all positions data
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  ...,
+  {
+    "id": "c4331483-e737-44d8-9165-f705ac5508c1",
+    "name": "Teller"
+  },
+  ...,
+]
 
 ```
 
 &nbsp;
+
+## 9. POST /positions
+
+Description:
+
+- Create a new position
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+- body:
+
+```json
+{
+  "name": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil menambahkan jabatan baru",
+  "position": {
+    "id": "521bb5b9-a180-4f80-86cc-ffefd624dddd",
+    "name": "test",
+    "updatedAt": "2023-12-17T13:24:28.632Z",
+    "createdAt": "2023-12-17T13:24:28.632Z"
+  }
+}
+```
+
+&nbsp;
+## 10. GET /positions/:id
+
+Description:
+
+- Get spesific position data by id 
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "id": "521bb5b9-a180-4f80-86cc-ffefd624dddd",
+  "name": "teller"
+}
+
+```
+&nbsp;
+
+## 11. PUT /positions/:id
+
+Description:
+
+- Edit position by id
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+- body:
+
+```json
+{
+  "name": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil mengedit nama jabatan"
+}
+
+```
+&nbsp;
+## 12. DELETE /positions/:id
+
+Description:
+
+- Delete position by id
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil menghapus jabatan"
+}
+
+```
+&nbsp;
+
+## 13. GET /employees
+
+Description:
+
+- Get all employees data
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  ...,
+  {
+    "id": "a1cc2d70-a493-4d2e-b1b5-404150b1eb01",
+    "firstName": "John",
+    "lastName": "Doe",
+    "BranchId": "de459730-aeea-4760-b558-f9b322be9de5",
+    "PositionId": "c4331483-e737-44d8-9165-f705ac5508c1",
+    "startDate": "2023-01-01T00:00:00.000Z",
+    "endDate": "2024-01-10T00:00:00.000Z",
+    "Branch": {
+      "id": "de459730-aeea-4760-b558-f9b322be9de5",
+      "name": "Cabang Jakarta Pusat"
+    },
+    "Position": {
+      "id": "c4331483-e737-44d8-9165-f705ac5508c1",
+      "name": "Teller"
+    }
+  },
+  ...,
+]
+
+```
+
+&nbsp;
+
+## 14. POST /employees
+
+Description:
+
+- Create a new employee
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+- body:
+
+```json
+{
+  "firstName": "string",
+  "lastName": "string",
+  "BranchId": "uuid",
+  "PositionId": "uuid",
+  "startDate": "date",
+  "endDate": "date"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil menambahkan pegawai baru",
+  "employee": {
+    "id": "57949975-1dfb-4c7f-b6af-bb1c36bdfe7b",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "BranchId": "352884e0-2c22-4fef-896e-e3021750e3ea",
+    "PositionId": "ae57df22-f865-467c-b347-d3bd6f90d606",
+    "startDate": "2023-02-15T00:00:00.000Z",
+    "endDate": "2024-02-15T00:00:00.000Z",
+    "updatedAt": "2023-12-17T13:24:28.632Z",
+    "createdAt": "2023-12-17T13:24:28.632Z"
+  }
+}
+```
+
+&nbsp;
+## 15. GET /employees/:id
+
+Description:
+
+- Get spesific employee data by id 
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "employee": {
+    "id": "57949975-1dfb-4c7f-b6af-bb1c36bdfe7b",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "BranchId": "352884e0-2c22-4fef-896e-e3021750e3ea",
+    "PositionId": "ae57df22-f865-467c-b347-d3bd6f90d606",
+    "startDate": "2023-02-15T00:00:00.000Z",
+    "endDate": "2024-02-15T00:00:00.000Z",
+    "Branch": {
+      "id": "352884e0-2c22-4fef-896e-e3021750e3ea",
+      "name": "Cabang Jakarta Selatan"
+    },
+    "Position": {
+      "id": "ae57df22-f865-467c-b347-d3bd6f90d606",
+      "name": "Asisten Administrasi"
+    }
+  },
+  "startDate": "2023-02-15",
+  "endDate": "2024-02-15"
+}
+
+```
+&nbsp;
+
+## 16. PUT /employees/:id
+
+Description:
+
+- Edit employee by id
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+- body:
+
+```json
+{
+  "firstName": "string",
+  "lastName": "string",
+  "BranchId": "uuid",
+  "PositionId": "uuid",
+  "startDate": "date",
+  "endDate": "date"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil mengedit pegawai"
+}
+
+```
+&nbsp;
+## 17. DELETE /employees/:id
+
+Description:
+
+- Delete employee by id
+
+Request:
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- query : 
+```json
+{
+  "id": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Berhasil menghapus pegawai"
+}
+
+```
+&nbsp;
+
 ## Global Error
 
 _Response (500 - Internal Server Error)_
