@@ -52,6 +52,11 @@ class EmployeeController {
         },
       });
       if (!employee) throw { name: "NotFound" };
+
+      employee.startDate = new Date(employee.startDate)
+        .toISOString()
+        .slice(0, 10);
+      employee.endDate = new Date(employee.endDate).toISOString().slice(0, 10);
       res.status(200).json(employee);
     } catch (err) {
       console.log(err);
